@@ -117,9 +117,31 @@ and returns the score at each pont in the game, like so:
 
 Final Score: awayTeam - homeTeam */
 
-function scoreboard() {
-  
-  
+// function scoreboard(cb, cb2, numOfInnings){
+//   let container = [];
+// for (let i = 1; i < numOfInnings+1; i++){
+//   container.push({homeTeam:cb()}, `-`, {awayTeam: cb()})
+//   }
+//   return container;
+// }
+// console.log(`Scoreboard: `, scoreboard(inning, finalScore, 9))
+
+function scoreboard(cb, cb2, numOfInnings) {
+  const container = []
+  let counter;
+  for (let counter = 1; counter < numOfInnings+1; counter++) {
+    if(counter == 1){
+       container.push(`${counter}st`, {homeTeam:cb(), awayTeam: cb()})
+    } else if (counter === 2){
+      container.push(`${counter}nd inning: `, {homeTeam:cb(), awayTeam: cb()})
+    } else if (counter === 3){
+      container.push(`${counter}rd inning: `, {homeTeam:cb(), awayTeam: cb()})
+    } else {
+      container.push(`${counter}th inning: `, {homeTeam:cb(), awayTeam: cb()})
+    }
+ }
+ container.push(`Final score: ?`);
+  return container
 }
-
-
+ console.log("Scoreboard: ", scoreboard(inning, finalScore, 9));
+ 
