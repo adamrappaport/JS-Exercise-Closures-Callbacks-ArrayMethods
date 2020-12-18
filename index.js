@@ -56,12 +56,13 @@ function counter2() {
 
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
 
-    /*Code Here*/
 
+function inning(){
+  return Math.floor(Math.random() * 3)
 }
 
+console.log(`score`,inning());
 /* Task 3: finalScore()
 
 Write a higher order function called `finalScore` that accepts the callback function `inning` (from above) and a number of innings and and returns the final score of the game in the form of an object.
@@ -76,11 +77,23 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
+function finalScore(callBack, numInn){
 
-  /*Code Here*/
+  let teamOne=0
+  let teamTwo=0
+
+  for(let i=0; i<numInn; i++){
+    
+    teamOne= teamOne + callBack();
+    teamTwo= teamTwo + callBack();
+
+  }
+
+let finalScore= {home:teamOne, away: teamTwo}
+return finalScore;
 
 }
+console.log(finalScore(inning , 9));
 
 /* Task 4: 
 
@@ -104,8 +117,31 @@ and returns the score at each pont in the game, like so:
 
 Final Score: awayTeam - homeTeam */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+// function scoreboard(cb, cb2, numOfInnings){
+//   let container = [];
+// for (let i = 1; i < numOfInnings+1; i++){
+//   container.push({homeTeam:cb()}, `-`, {awayTeam: cb()})
+//   }
+//   return container;
+// }
+// console.log(`Scoreboard: `, scoreboard(inning, finalScore, 9))
+
+function scoreboard(cb, cb2, numOfInnings) {
+  const container = []
+  let counter;
+  for (let counter = 1; counter < numOfInnings+1; counter++) {
+    if(counter == 1){
+       container.push(`${counter}st`, {homeTeam:cb(), awayTeam: cb()})
+    } else if (counter === 2){
+      container.push(`${counter}nd inning: `, {homeTeam:cb(), awayTeam: cb()})
+    } else if (counter === 3){
+      container.push(`${counter}rd inning: `, {homeTeam:cb(), awayTeam: cb()})
+    } else {
+      container.push(`${counter}th inning: `, {homeTeam:cb(), awayTeam: cb()})
+    }
+ }
+ container.push(`Final score: ?`);
+  return container
 }
-
-
+ console.log("Scoreboard: ", scoreboard(inning, finalScore, 9));
+ 
